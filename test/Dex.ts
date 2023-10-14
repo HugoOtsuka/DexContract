@@ -1,6 +1,7 @@
 import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import { Signer } from "ethers";
 import { Token } from "../interfaces/Token";
 
 const SIDE = {
@@ -43,7 +44,7 @@ describe("Dex", function () {
       dex.addToken(ZRX, zrx.getAddress()),
     ]);
     const amount = ethers.parseEther("1000");
-    const seedTokenBalance = async (token: Token, trader: any) => {
+    const seedTokenBalance = async (token: Token, trader: Signer) => {
       await token.faucet(trader, amount);
       await token.connect(trader).approve(dex.getAddress(), amount);
     };
